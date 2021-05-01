@@ -25,6 +25,7 @@ namespace Business.Constants
         public static string BrandListed = "Marka listelendi.";
         public static string BrandNotFound = "Marka bulunamadı.";
         public static string BrandMaintenanceTime = "Markalar listelenemedi. Sistem bakımda.";
-
+        public static string Error = "İstek gerçekleştirilemedi.";
+        public static string Successful = "İşlem başarılı.";
     }
 }

@@ -14,8 +14,11 @@ namespace DataAccess.Concrete.EntityFramework
         {
             optionsBuilder.UseSqlServer(@"Server=(localdb)\MSSQLLocalDB;Database=ReCapProject;Trusted_Connection=true");//@ => \ bu işreti tek algılaması için yazıldı.
         }
-        public DbSet<Car> tblCar { get; set; }
-        public DbSet<Brand> tblBrand { get; set; }
-        public DbSet<Color> tblColor { get; set; }
+        public DbSet<Car> tblCars { get; set; }
+        public DbSet<Brand> tblBrands { get; set; }
+        public DbSet<Color> tblColors { get; set; }
+        public DbSet<User> tblUsers { get; set; }
+        public DbSet<Customer> tblCustomers { get; set; }
+        public DbSet<Rental> tblRentals { get; set; }
     }
 }
