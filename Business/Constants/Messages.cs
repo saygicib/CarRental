@@ -27,5 +27,9 @@ namespace Business.Constants
         public static string BrandMaintenanceTime = "Markalar listelenemedi. Sistem bakımda.";
         public static string Error = "İstek gerçekleştirilemedi.";
         public static string Successful = "İşlem başarılı.";
+        public static string ImageLimitExceded = "Resim limiti doldu";
+        public static string ImageAdded = "Resim eklendi.";
+        public static string ImageDeleted = "Resim silindi.";
+        public static string ImageUpdate = "Resim güncellendi.";
     }
 }

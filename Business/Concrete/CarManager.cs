@@ -9,6 +9,10 @@ using DataAccess.Concrete.EntityFramework;
 using Entities.DTOs;
 using Core.Utilities.Results;
 using Business.Constants;
+using Business.ValidationRules.FluentValidation;
+using FluentValidation;
+using Core.CrossCuttingConcerns.Validation;
+using Core.Aspect.Autofac.Validation;
 
 namespace Business.Concrete
 {
@@ -19,24 +23,9 @@ namespace Business.Concrete
         {
             _carsDal = carDal;
         }
-
+        //[ValidationAspect(typeof(CarValidator))]        
         public IResult Add(Car car)
-        {
-            int brId = car.BrandId;
-            string brName ="";
-            EfBrandDal efBrandDal = new EfBrandDal();
-            foreach (var brands in efBrandDal.GetAll())
-            {
-                if (brId == brands.BrandId)
-                {
-                    brName = brands.BrandName;
-                }
-            }
-            if (brName.Length < 2 && car.DailyPrice<=0)
-            {
-
-                return new ErrorResult(Messages.CarInvalid);
-            }
+        {            
             _carsDal.Add(car);
             return new SuccessResult(Messages.CarAdded);            
         }
@@ -73,12 +62,12 @@ namespace Business.Concrete
             return new SuccessDataResult<List<CarDetailsDto>>(_carsDal.GetCarDetails());
         }
 
-        public IDataResult<List<Car>> GetCarsByBrandId(int id)
+        public IDataResult<List<Car>> GetCarByBrandId(int id)
         {
             return new SuccessDataResult<List<Car>>(_carsDal.GetAll(c => c.BrandId == id));
         }
 
-        public IDataResult<List<Car>> GetCarsByColorId(int id)
+        public IDataResult<List<Car>> GetCarByColorId(int id)
         {
             return new SuccessDataResult<List<Car>>(_carsDal.GetAll(c => c.ColorId == id));
         }
