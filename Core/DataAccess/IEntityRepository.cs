@@ -15,7 +15,7 @@ namespace Core.DataAccess
         void Add(T entity);
         void Delete(T entity);
         void Update(T entity);
-        T GetById(Expression<Func<T,bool>> filter);//filtreleme zorunlu.
+        T Get(Expression<Func<T,bool>> filter);//filtreleme zorunlu.
         List<T> GetAll(Expression<Func<T,bool>> filter=null); //istediğimiz filtre yöntemine göre getirecek. istersek filtreleme yapmaya gerek olmayacak.
     }
 }

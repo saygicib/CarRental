@@ -13,6 +13,7 @@ using Business.ValidationRules.FluentValidation;
 using FluentValidation;
 using Core.CrossCuttingConcerns.Validation;
 using Core.Aspect.Autofac.Validation;
+using Business.BusinessAspect.Autofac;
 
 namespace Business.Concrete
 {
@@ -23,7 +24,8 @@ namespace Business.Concrete
         {
             _carsDal = carDal;
         }
-        //[ValidationAspect(typeof(CarValidator))]        
+        [SecuredOperation("product.add")]
+        [ValidationAspect(typeof(CarValidator))]        
         public IResult Add(Car car)
         {            
             _carsDal.Add(car);
@@ -54,7 +56,7 @@ namespace Business.Concrete
         public IDataResult<Car> GetById(int id)
         {        
             
-            return new SuccessDataResult<Car>(_carsDal.GetById(c => c.CarId == id));            
+            return new SuccessDataResult<Car>(_carsDal.Get(c => c.CarId == id));            
         }
 
         public IDataResult<List<CarDetailsDto>> GetCarDetails()

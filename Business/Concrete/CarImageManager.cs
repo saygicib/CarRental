@@ -54,7 +54,7 @@ namespace Business.Concrete
             {
                 return new ErrorDataResult<CarImage>(result.Message);
             }
-            return new SuccessDataResult<CarImage>(_carImageDal.GetById(c => c.Id == id));
+            return new SuccessDataResult<CarImage>(_carImageDal.Get(c => c.Id == id));
         }
         public IDataResult<List<CarImage>> GetImagesByCarId(int carId)
         {
@@ -73,7 +73,7 @@ namespace Business.Concrete
             {
                 return result;
             }
-            carImage.ImagePath = FileHelper.Update(_carImageDal.GetById(c => c.Id == carImage.Id).ImagePath, file);
+            carImage.ImagePath = FileHelper.Update(_carImageDal.Get(c => c.Id == carImage.Id).ImagePath, file);
             carImage.Date = DateTime.Now;
             _carImageDal.Update(carImage);
             return new SuccessResult(Messages.ImageUpdate);

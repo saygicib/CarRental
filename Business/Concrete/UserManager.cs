@@ -2,6 +2,7 @@
 using Business.Constants;
 using Business.ValidationRules.FluentValidation;
 using Core.Aspect.Autofac.Validation;
+using Core.Entities.Concrete;
 using Core.Utilities.Results;
 using DataAccess.Abstract;
 using Entities.Concrete;
@@ -49,20 +50,27 @@ namespace Business.Concrete
         {
             foreach (var user in _userDal.GetAll())
             {
-                if (user.UserId == id)
+                if (user.Id == id)
                 {
-                    return new SuccessDataResult<List<User>>(_userDal.GetAll(u=>u.UserId==id));
+                    return new SuccessDataResult<List<User>>(_userDal.GetAll(u=>u.Id==id));
 
                 }
             }
             return new ErrorDataResult<List<User>>(Messages.Error);
-        }
-
+        }   
         public IResult Update(User user)
         {
             _userDal.Update(user);
             return new SuccessResult();
         }
+        public User GetByMail(string email)
+        {
+            return _userDal.Get(u => u.Email == email);
+        }
 
+        public List<OperationClaim> GetClaims(User user)
+        {
+            return _userDal.GetClaims(user);
+        }
     }
 }
